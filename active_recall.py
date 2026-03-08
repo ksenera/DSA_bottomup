@@ -36,3 +36,28 @@ def reverse_list(head):
 #Error 3: printed instead of returned — forgot functions need to return values to be useful
 #Why: had the logic right, syntax slipped on variable names under recall pressure
 #Fix: name variables once, use exact same name throughout, always ask "does this function need to return something"
+
+## Hashmap/ dictionary character counter 
+# say i have a sentence. I wanna count the first and only occurence of any character 
+sentence = "abracadabra"
+
+# need the dictionary variable to assign key and add value. 
+
+# Note: dictionary in Python = hashmap conceptually = unordered_map in C++
+count = {} 
+
+for char in sentence:
+    if char in count:
+        count[char] += 1
+    else:
+        count[char] = 1
+
+print(count)
+
+#error log entry 2:
+#Error: wrote `if count in char` instead of `if char in count`
+#Why: flipped the order under recall pressure
+#Fix: read it as a question — "is this CHAR inside my COUNT dictionary" 
+     #the thing you're looking for comes first, the container comes second
+     #char in count = "is char a key in count" ✓
+     #count in char = "is the whole dictionary inside one character" ✗
