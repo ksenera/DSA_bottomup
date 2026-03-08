@@ -10,6 +10,15 @@ def reverse_list(head):
         curr = next_node 
         print(f" after flip: prev={prev.val}, curr={curr.val if curr else None}")
 
+        #prev=None, curr=A, next=B
+ #after flip: prev=A, curr=B
+#prev=A, curr=B, next=c
+ #after flip: prev=B, curr=c
+#prev=B, curr=c, next=D
+ #after flip: prev=c, curr=D
+#prev=c, curr=D, next=None
+ #after flip: prev=D, curr=None
+
     return prev 
 
 
