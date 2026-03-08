@@ -18,3 +18,21 @@ def linked_list(head):
     # 1 error here 
     print(next)
 
+def reverse_list(head):
+    curr = head 
+    prev = None 
+
+    while curr is not None:
+        next_node = curr.next # save next into a variable to track 
+        curr.next = prev # reverse if A is curr and .next is B then reverse B is prev to A 
+        prev = curr # error 1 slide prev forward 
+        curr = next_node # error 2 why would next = None ???? slide curr forward
+    return prev # prev is now the new head 
+
+#error log entry 1:
+
+#Error 1: used `next` instead of `next_node` — variable name inconsistency
+#Error 2: wrote `next = None` instead of `curr = next_node` — lost the forward movement
+#Error 3: printed instead of returned — forgot functions need to return values to be useful
+#Why: had the logic right, syntax slipped on variable names under recall pressure
+#Fix: name variables once, use exact same name throughout, always ask "does this function need to return something"
