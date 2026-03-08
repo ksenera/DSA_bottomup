@@ -4,7 +4,7 @@ def reverse_list(head):
 
     while curr is not None:
         next_node = curr.next # next is a property of the current node we are standing on
-        curr.next = 
+        curr.next = prev
         prev = 
         curr = 
 
