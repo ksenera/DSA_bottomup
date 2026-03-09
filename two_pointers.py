@@ -19,11 +19,13 @@ ___________PLAIN ENGLISH___________
 """
 
 #_________FUNCTION SKELETON_________
-def find_two(nums):
+def find_two(nums, target):
     pass
 
 #_________ASSERT STATEMENTS_________
-assert find_two(nums) == target
+# NORMAL CASE nums = [2, 7, 11, 15], target = 9 
+# Ex: 2 + 7 = 9 =====> nums[0] + nums[1] = target
+assert find_two(nums, target) == [0, 1]
 
 """
 _______IMMEDIATE FEEDBACK LOG_______
