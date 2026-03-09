@@ -57,3 +57,27 @@ print(max_depth(node1))
 # ClassName(params) is always required to create an object
 # raw values have no properties
 # ─────────────────
+
+
+
+def is_symmetric(node):
+    if node is None:
+        return True
+    if node.left.left == node.right.right:
+        return True
+    if node.left.right == node.right.left:
+        return True 
+    
+# WRONG 
+
+def mirror(left, right):
+    if left is None and right is None:
+        return True 
+    if left is None and right is not None:
+        return False 
+    if left is not None and right is None:
+        return False 
+    if left is not None and right is not None:
+        if left.val != right.val:
+            return False
+        return mirror(left.left, right.right) and mirror(left.right, right.left)
