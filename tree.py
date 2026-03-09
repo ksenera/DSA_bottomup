@@ -1,3 +1,9 @@
+class Node:
+    def __init__(self, val):
+        self.val = val 
+        self.left = None 
+        self.right = None 
+
 def find_max(node):
     if node is None:
         return float('-inf')
@@ -13,13 +19,19 @@ def find_max(node):
 # test empty tree first 
 assert find_max(None) == float('-inf')
 
+# single node
+root = Node(5)
+assert find_max(root) == root.val
 
-class Node:
-    def __init__(self, val):
-        self.val = val 
-        self.left = None 
-        self.right = None 
+# only negatives 
+root2 = Node(-3)
+root2.left = Node(-7)
+root2.right = Node(-1)
+assert find_max(root2) == root2.right
 
+# ________________________________________________________________
+
+## example for max_depth here is a symmetric binary tree
 node1 = Node(1)
 node2 = Node(2)
 node3 = Node(3) 
