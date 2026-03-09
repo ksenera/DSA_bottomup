@@ -10,6 +10,10 @@ def find_max(node):
     # if im standing at curr_node -> child1Left && curr_node -> child2Right how do i 
     # access left child of curr_node
 
+# test empty tree first 
+assert find_max(None) == float('-inf')
+
+
 class Node:
     def __init__(self, val):
         self.val = val 
