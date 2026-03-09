@@ -63,6 +63,8 @@ def find_two(nums, target):
             # WRONG
             #return nums[left, right]
             return [left, right]
+    # no soln exists
+    return []
 
 
 #_________ASSERT STATEMENTS_________
@@ -75,7 +77,7 @@ assert find_two([], target) == []
 #wrong - assert find_two(nums, target) == IndexError 
 
 # NO SOLN EXISTS: nums = [2, 7, 11, 15], target = 100
-assert find_two(nums, target) == [] 
+assert find_two(nums, 100) == [] 
 #not consistent - assert find_two(nums, target) == None
 
 """
