@@ -34,3 +34,26 @@ def max_depth(node):
 
     return (max(left_depth, right_depth) + 1)
 print(max_depth(node1))
+# returned 3 in terminal correct 
+
+# March 9 2026
+# ─────────────────
+# PROBLEM
+# Max depth of binary tree
+
+# WHAT I WROTE
+# node1 = 1 instead of node1 = Node(1)
+
+# WHAT WAS WRONG
+# Created integer not Node instance
+# dot notation fails on primitives
+
+# WHY IT HAPPENED
+# Forgot to call the class constructor
+# knew the class existed but didn't instantiate it
+
+# THE INVARIANT
+# Class exists ≠ instance exists
+# ClassName(params) is always required to create an object
+# raw values have no properties
+# ─────────────────
