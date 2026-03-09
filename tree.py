@@ -15,3 +15,22 @@ class Node:
         self.val = val 
         self.left = None 
         self.right = None 
+
+node1 = Node(1)
+node2 = Node(2)
+node3 = Node(3) 
+node4 = Node(4)
+node5 = Node(5)
+
+node1.left = node2
+node2.left = node4
+
+def max_depth(node):
+    if node is None:
+        return 0
+    
+    left_depth = max_depth(node.left)
+    right_depth = max_depth(node.right)
+
+    return (max(left_depth, right_depth) + 1)
+print(max_depth(node1))
