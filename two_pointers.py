@@ -17,4 +17,20 @@ ___________PLAIN ENGLISH___________
    - 
 
 """
+
+#_________FUNCTION SKELETON_________
+def find_two(nums):
+    pass
+
 #_________ASSERT STATEMENTS_________
+assert find_two(nums) == target
+
+"""
+_______IMMEDIATE FEEDBACK LOG_______
+my assertion is wrong:
+    the function should return indices not the target value
+
+function signature missing target parameter:
+    given ordered list alone won't tell func to know what to 
+    look for. 
+"""
