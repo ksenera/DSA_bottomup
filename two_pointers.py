@@ -106,5 +106,8 @@ Problem 1: no loop. checked sum once and stopped
 Problem 2: not updating pointers:
  - accessing value nums[right -1] but not saving it anywhere
 Problem 3: wrong return:
- - return sum returns value i need to return indcies 
+ - return sum returns value i need to return indices 
+Problem 4: When the loop exits without finding a soln the 
+function returns None implicitly:
+ - explicitly return [] after the loop ends
 """
