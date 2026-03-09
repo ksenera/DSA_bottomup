@@ -28,9 +28,10 @@ def find_two(nums, target):
 assert find_two(nums, target) == [0, 1]
 
 # EMPTY LIST: nums = [], target = 9
-assert find_two(nums, target) == None 
+assert find_two(nums, target) == [] #wrong - IndexError 
 
-# NO SOLN EXISTS:
+# NO SOLN EXISTS: nums = [2, 7, 11, 15], target = 100
+assert find_two(nums, target) == [] #wrong - None 
 
 """
 _______IMMEDIATE FEEDBACK LOG_______
@@ -40,4 +41,8 @@ my assertion is wrong:
 function signature missing target parameter:
     given ordered list alone won't tell func to know what to 
     look for. 
+
+my assertion for empty and no soln is wrong:
+    can't assert an exception like that. IndexError is something 
+    that crashes your program not a return value
 """
