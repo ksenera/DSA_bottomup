@@ -111,3 +111,24 @@ Problem 4: When the loop exits without finding a soln the
 function returns None implicitly:
  - explicitly return [] after the loop ends
 """
+
+
+# March 9 2026
+# ─────────────────
+# PROBLEM
+# Two pointers — two sum sorted array (Leetcode #167)
+
+# KEY CONFUSION
+# mixed up index and value repeatedly
+# right is the position
+# nums[right] is the value at that position
+# moving the pointer means right -= 1
+# not nums[right - 1]
+
+# INVARIANT
+# pointer = position tracker (integer)
+# nums[pointer] = value at that position
+# you move pointers
+# you read values
+# never confuse the two
+# ─────────────────
