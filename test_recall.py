@@ -138,6 +138,11 @@ assert max_depth(None) == 0 # empty tree
 # empty tree ret 0 depth of nothing is ZERO NOT NULL
 assert max_depth(node1) == 3
 
+# QUESTION TYPE: depth / value / relationship / path / count
+# LOCAL QUESTION: what does one node need to know?
+# BASE CASE: what does None return and why?
+# COMBINE: what do I do with left and right?
+
 # find max val in binary tree 
 def max_value(node):
     pass 
