@@ -8,13 +8,19 @@ def find_max(node):
     if node is None:
         return float('-inf')
     # did 0 first but what if a tree contains only negative numbers. 
-    left_max = find_max()
+    left_max = find_max(node.left)
+    right_max = find_max(node.right)
+    #if node is not None:
+        #return node.val
+
+    return max(left_max,right_max, node.val)
     # left_max = find_max(node.val) WRONG 
     # need to pass a node, find_max expects a node object not a number
     # find_max function needs to the whole node to access both 
     # .val and .next children 
     # if im standing at curr_node -> child1Left && curr_node -> child2Right how do i 
     # access left child of curr_node
+
 
 # test empty tree first 
 assert find_max(None) == float('-inf')
@@ -27,7 +33,53 @@ assert find_max(root) == root.val
 root2 = Node(-3)
 root2.left = Node(-7)
 root2.right = Node(-1)
-assert find_max(root2) == root2.right
+assert find_max(root2) == root2.right.val
+
+print(find_max(None))
+print(find_max(root))
+print(find_max(root2))
+
+# March 9 2026
+# ─────────────────────────────────────
+# PROBLEM
+# find_max in binary tree (active recall rep)
+
+# ERROR 1
+# WHAT I WROTE
+# return max(left_max, right_max)
+
+# WHAT WAS WRONG
+# forgot to include current node's value
+# only compared children, ignored self
+
+# WHY IT HAPPENED
+# recursion felt like it should handle everything
+# forgot the current node is also a candidate
+
+# INVARIANT
+# in tree recursion you always have three candidates
+# left result, right result, current node
+# max(left_max, right_max, node.val)
+# never forget the node you're standing on
+
+# ─────────────────────────────────────
+# ERROR 2
+# WHAT I WROTE
+# curr_node = find_max(node)
+
+# WHAT WAS WRONG
+# called find_max with same node = infinite recursion
+# recursion depth exceeded
+
+# WHY IT HAPPENED
+# thought i needed to recurse to get current value
+# but node.val is already accessible directly
+
+# INVARIANT
+# to get current node value just write node.val
+# never call the function again on the same node
+# recursion only goes to node.left and node.right
+# ─────────────────────────────────────
 
 # ________________________________________________________________
 
