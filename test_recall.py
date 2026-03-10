@@ -210,9 +210,10 @@ def is_symmetric(left, right):
 # BASE CASE: None returns true for symmetry
 # COMBINE: what do I do with left and right?
     pass
-assert is_symmetric(None) == True
+
 assert is_symmetric(None, None) == True
 assert is_symmetric(node1) == False 
+assert is_symmetric(8,9) == False
 
 
 # leetcode 53 maximum subarrary Kadane's
