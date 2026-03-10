@@ -201,8 +201,16 @@ assert max_value(root1) == -4
 
 
 # leetcode 101 symmetric tree 
+# Given the root of a binary tree, 
+# check whether it is a mirror of itself 
+# (i.e., symmetric around its center).
 def is_symmetric(left, right):
+# QUESTION TYPE: depth / value / relationship / path / count
+# LOCAL QUESTION: what does one node need to know?
+# BASE CASE: what does None return and why?
+# COMBINE: what do I do with left and right?
     pass
+
 
 
 
