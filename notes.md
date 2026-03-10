@@ -4,6 +4,14 @@ SCAFFOLD
 3. BASE CASE:   when do I stop and what do I return?
 4. COMBINE:     what do I do with the results?
 
+TDD SKELETON 
+def function_name(params):
+    # CATEGORY: 
+    # LOCAL:    
+    # BASE:     
+    # COMBINE:  
+    pass
+
 TREES
 category:  depth / value / relationship / path / count
 local:     what does one node need to know?
