@@ -145,7 +145,15 @@ assert max_depth(node1) == 3
 
 # find max val in binary tree 
 def max_value(node):
-    pass 
+    #Q: find value 
+    #LQ: node needs to know it's value 
+    #BC: none returns float('-inf')
+    #C: check left sub tree get max val then check right subtree 
+
+    if node is None:
+        return 0
+
+assert max_value(None) == 0
 
 # leetcode 101 symmetric tree 
 def is_symmetric(left, right):
