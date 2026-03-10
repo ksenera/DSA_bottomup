@@ -150,10 +150,17 @@ def max_value(node):
     #BC: none returns float('-inf')
     #C: check left sub tree get max val then check right subtree 
 
+# base case empty tree 
     if node is None:
-        return 0
+        return float('-inf')
+    
+    left = node.left
+    right = node.right
+    
+assert max_value(None) == float('-inf')
+assert max_value(node1) == 7
 
-assert max_value(None) == 0
+
 
 # leetcode 101 symmetric tree 
 def is_symmetric(left, right):
