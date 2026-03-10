@@ -154,12 +154,23 @@ def max_value(node):
     if node is None:
         return float('-inf')
     
-    left = node.left
-    right = node.right
-    
-assert max_value(None) == float('-inf')
-assert max_value(node1) == 7
+    # WRONG
+    # left = node.left
+    # right = node.right
+    left = max_value(node.left)
+    right = max_value(node.right)
 
+    return max(left, right, node.val)
+
+# tree empty
+assert max_value(None) == float('-inf')
+# tree example nodes 1-7
+assert max_value(node1) == 7
+# negative values assertion ? 
+root1 = Node(-9)
+root1.left = Node(-4)
+root1.right = Node(-6)
+assert max_value(root1) == -4
 
 
 # leetcode 101 symmetric tree 
