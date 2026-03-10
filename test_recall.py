@@ -205,13 +205,14 @@ assert max_value(root1) == -4
 # check whether it is a mirror of itself 
 # (i.e., symmetric around its center).
 def is_symmetric(left, right):
-# QUESTION TYPE: depth / value / relationship / path / count
-# LOCAL QUESTION: what does one node need to know?
-# BASE CASE: what does None return and why?
+# QUESTION TYPE: value and structure
+# LOCAL QUESTION: node needs to know 
+# BASE CASE: None returns true for symmetry
 # COMBINE: what do I do with left and right?
     pass
-
-
+assert is_symmetric(None) == True
+assert is_symmetric(None, None) == True
+assert is_symmetric(node1) == False 
 
 
 # leetcode 53 maximum subarrary Kadane's
