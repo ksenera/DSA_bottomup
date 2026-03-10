@@ -172,6 +172,33 @@ root1.left = Node(-4)
 root1.right = Node(-6)
 assert max_value(root1) == -4
 
+# March 9 2026
+# ─────────────────
+# PROBLEM
+# find_max active recall rep 2
+
+# ERROR
+# WHAT I WROTE
+# left = node.left
+# right = node.right
+
+# WHAT WAS WRONG
+# stored node objects not values
+# needed to recurse to get max values
+
+# WHY IT HAPPENED
+# forgot recursion is the tool
+# tried to access children directly
+# same error pattern as symmetric tree base cases —
+# confused the node with the result
+
+# INVARIANT
+# node.left = the child node object
+# max_value(node.left) = the max value IN that subtree
+# always recurse to get results
+# never access children directly unless in base case
+# ─────────────────
+
 
 # leetcode 101 symmetric tree 
 def is_symmetric(left, right):
