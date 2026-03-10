@@ -204,16 +204,22 @@ assert max_value(root1) == -4
 # Given the root of a binary tree, 
 # check whether it is a mirror of itself 
 # (i.e., symmetric around its center).
-def is_symmetric(left, right):
+def is_symmetric(root):
 # QUESTION TYPE: value and structure
 # LOCAL QUESTION: node needs to know 
 # BASE CASE: None returns true for symmetry
 # COMBINE: what do I do with left and right?
     pass
 
-assert is_symmetric(None, None) == True
-assert is_symmetric(node1) == False 
-assert is_symmetric(8,9) == False
+assert is_symmetric(None) == True
+root_sym = Node(1)
+root_sym.left = Node(2)
+root_sym.right = Node(2)
+assert is_symmetric(root_sym) == True
+root_asym = Node(1)
+root_asym.left = Node(9)
+root_asym.right = Node(10)
+assert is_symmetric(root_asym) == False
 
 
 # leetcode 53 maximum subarrary Kadane's
