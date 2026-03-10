@@ -188,3 +188,18 @@ def max_subarray():
 
     for i in list:
         print(i)
+
+
+# leetcode #167 two sum II sorted array 
+# input: [2, 7, 11, 15], target = 9 
+# return: indices of two numbers that sum to target 
+def two_sum(left, right):
+    pass 
+
+"""
+print AFTER you have values to show
+print BEFORE you return
+what do I want to verify at this moment in the code?
+how do I generate the right questions from first principles
+so I never blank on a new problem?
+"""
