@@ -209,7 +209,18 @@ def is_symmetric(root):
 # LOCAL QUESTION: node needs to know 
 # BASE CASE: None returns true for symmetry
 # COMBINE: what do I do with left and right?
-    pass
+    if root is None:
+        return True 
+    return helper(root.left, root.right)
+
+def helper(left, right):
+    if left is None and right is None:
+        return True
+    if left is None or right is None:
+        return False
+    if left.val != right.val:
+        return False
+    return helper(left.left, right.right) and helper(left.right, right.left)
 
 assert is_symmetric(None) == True
 root_sym = Node(1)
@@ -220,6 +231,15 @@ root_asym = Node(1)
 root_asym.left = Node(9)
 root_asym.right = Node(10)
 assert is_symmetric(root_asym) == False
+
+# TRANSLATE: one English sentence per line of code
+# "outer kicks off mirror check" → return helper(root.left, root.right)
+# "both None → symmetric"       → if left is None and right is None: return True
+# "one None → asymmetric"       → if left is None or right is None: return False
+# "values differ → asymmetric"  → if left.val != right.val: return False
+# "recurse mirrors"             → return helper(left.left, right.right) and ...
+
+# Scaffold → Translate → Copy
 
 
 # leetcode 53 maximum subarrary Kadane's
