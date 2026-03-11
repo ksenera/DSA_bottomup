@@ -98,7 +98,7 @@ def long_substr(s):
         seen[s[right]] = right 
         # track longest window seen every iteration in for loop
         max_len = max(max_len, right - left + 1)
-        print(f"seen={seen}, left={left}, right={right}, char={s[right]}, max_len={max_len}") 
+        # print(f"seen={seen}, left={left}, right={right}, char={s[right]}, max_len={max_len}") 
     return max_len # after loop ends 
 
 # all happy path as there is string and returned the length aka does this character exist
@@ -108,3 +108,24 @@ assert long_substr("pwwkew") == 3
 
 # base case empty string return 0 
 assert long_substr("") == 0 
+
+
+# March 11 2026
+# ─────────────────
+# PROBLEM
+# LC3 Longest Substring — implementation
+
+# ERROR 1
+# seen = 0 instead of seen = {}
+# INVARIANT: tracking variables → always ask data type first
+# char→index lookup needs dict not integer
+
+# ERROR 2  
+# update seen and max_len inside if block
+# INVARIANT: update state every iteration
+#            only move left when constraint broken
+
+# ERROR 3
+# return inside loop
+# INVARIANT: return after loop exits, not during
+# ─────────────────
