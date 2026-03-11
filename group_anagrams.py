@@ -51,7 +51,9 @@ def group_anagrams_copy(strs):        # strs here = PARAMETER
 # The parameter `strs` already holds whatever you pass in 
 # via the assert.
 
-
+#anchor: "store while scanning, retrieve in O(1)"
+#key invariant: sorted(word) = fingerprint
+#mechanics: "".join(sorted(word)), list(result.values())
 
 #leetcode 49 Medium 
 def group_anagrams(strs):

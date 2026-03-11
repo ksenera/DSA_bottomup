@@ -82,6 +82,11 @@ for right in range(len(s)):
     track max              ← every iteration
 return max_len             ← after loop ends
 """
+
+#anchor: "expand right until broken, shrink left until fixed"
+#key invariant: seen[char] = index, left = seen[s[r]] + 1
+#mechanics: seen={}, right-left+1, update every iter, return after loop
+
 def long_substr(s):
     # WRONG seen = 0 # track if char was seen at beginning no chars seen so init to 0
     # seen store char -> index
