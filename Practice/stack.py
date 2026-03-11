@@ -45,7 +45,9 @@ WHAT DO I TRACK internally to make each operation work?
 --> what do i need to track to answer that in O(1) without scanning whole stack
     = track value of elements to know minimum element 
 --> what should that second list track at each push so that when i pop, ik new min. 
-    = 
+    = at every push i know what curr_min is. 2nd stack stores min at each step in para
+--> when you pop from main stack you also pop from min stack. what left on top of min stack?
+    = the minimum that was tracked up until the last operation
 """
 #              int for plate with smallest number and plate# on top
 # FAMILY:      STACK
@@ -55,3 +57,20 @@ WHAT DO I TRACK internally to make each operation work?
 # BASE CASE:   empty stack return null => [] == null
 # COMBINE:     
 # TRANSLATE:
+
+
+"""
+WHAT OPERATIONS:
+                - push(int val), pop(), top(), getMin()
+WHAT DO I TRACK:
+                - self.stack = [] # main stack
+                - self.min_stack = [] # parallel min stack, top always = curr_min
+                main stack: [-2, 0, -3] -> pop -> [-2, 0]
+                min stack: [-2, -2, -3] -> pop -> [-2, -2] <-- top = -2 = curr_min
+push: 
+
+pop:
+top: 
+getMin:
+TRANSLATE: 
+"""
