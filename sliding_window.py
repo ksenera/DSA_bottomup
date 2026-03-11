@@ -96,7 +96,7 @@ def long_substr(s):
         seen[s[right]] = right 
         # track longest window seen every iteration in for loop
         max_len = max(max_len, right - left + 1)
-        print(max_len) 
+        print(f"seen={seen}, left={left}, right={right}, char={s[right]}, max_len={max_len}") 
     return max_len # after loop ends 
 
 # all happy path as there is string and returned the length aka does this character exist

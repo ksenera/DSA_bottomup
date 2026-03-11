@@ -10,3 +10,17 @@ from typing import List → only needed if you use capital List
 - "".join(sorted(word))   → sort string, no separator
 - list(result.values())   → all dict values as list
 - defaultdict(list)       → auto-initializes missing keys to []
+
+
+# Sliding Window
+# VOCAB LOG
+- seen = {}  vs  seen = 0
+- f"label={variable}"
+- right - left + 1  for window size
+- max_len tracking variable
+- indentation — update every iter vs only on break
+# DEBUGGING
+- print(f"label={variable}")   → print variable value with label
+variable gets evaluated, label is just text
+So whatever you want to see, name it and put the variable after `=` inside `{}`
+print AFTER you have values, BEFORE you return
