@@ -146,10 +146,6 @@ hit a mechanics gap mid-problem
 - INPUT TYPE:  what the function receives
 - OUTPUT TYPE: what the function returns
 
-# VOCAB LOG
-- "".join(sorted(word))   → sort string, no separator
-- list(result.values())   → all dict values as list
-- defaultdict(list)       → auto-initializes missing keys to []
 
 # ANCHOR SENTENCES 
 TREES:        "ask None, ask one node, combine children"
