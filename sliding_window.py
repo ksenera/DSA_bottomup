@@ -3,6 +3,11 @@ SLIDING WIN:  "expand right until broken, shrink left until fixed"
 
 contiguous subarray + constraint → sliding window 
 
+PREDICTION:  sliding window? hashmap? two pointers?
+SIGNAL:      what in the problem description triggered that?
+FAMILY:      confirmed archetype
+CATEGORY:    specific to this problem
+
 CATEGORY:  longest substring with constraint
 LOCAL:     is this character already in my window?
 BASE CASE: empty string → return 0
