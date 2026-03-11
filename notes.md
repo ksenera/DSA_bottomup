@@ -1,3 +1,5 @@
+problem → plain English → base case → invariant → implement
+
 SCAFFOLD
 1. CATEGORY:    what type of problem is this?
 2. LOCAL:       what does one step/element need to know?
@@ -123,3 +125,47 @@ hit a mechanics gap mid-problem
 → I tell you the tool
 → you use it immediately in context
 → active recall later from blank IDE
+
+# ASSERT TYPES BY FAMILY
+- deterministic  → strict assert (trees, linked list, two pointers)
+- non-deterministic → print + visual verify (grouping, backtracking)
+
+# DETERMINISTIC OUTPUT → strict assert
+- linked list, trees, two pointers, sliding window
+- assert reverse_list(head) == expected
+
+# NON-DETERMINISTIC OUTPUT → print + visual verify  
+- grouping (HashMap), permutations, backtracking
+- print(group_anagrams(strs)) → verify groups manually
+
+# TRANSLATE STEP — add to every scaffold
+- TRANSLATE: one English sentence → one line of code
+- "outer kicks off check" → return helper(root.left, root.right)
+
+# INPUT/OUTPUT TYPES — add to HashMap scaffold
+- INPUT TYPE:  what the function receives
+- OUTPUT TYPE: what the function returns
+
+# VOCAB LOG
+- "".join(sorted(word))   → sort string, no separator
+- list(result.values())   → all dict values as list
+- defaultdict(list)       → auto-initializes missing keys to []
+
+# ANCHOR SENTENCES 
+TREES:        "ask None, ask one node, combine children"
+HASHMAP:      "store while scanning, retrieve in O(1)"
+TWO POINTERS: "squeeze inward until they meet"
+SLIDING WIN:  "expand right until broken, shrink left until fixed"
+LINKED LIST:  "save next, reverse pointer, slide forward"
+BACKTRACK:    "choose, recurse, undo"
+BINARY SEARCH:"eliminate half, find the boundary"
+DP:           "current answer depends on previous answer"
+GRAPHS:       "visit neighbors you haven't seen"
+
+# RECOGNITION SIGNALS
+sorted array + find boundary     → binary search
+contiguous subarray + constraint → sliding window  
+tree + combine children          → DFS recursion
+grouping + fingerprint           → HashMap
+minimum steps + grid             → BFS
+all combinations                 → backtracking
