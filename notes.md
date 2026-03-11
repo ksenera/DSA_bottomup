@@ -1,5 +1,23 @@
 problem → plain English → base case → invariant → implement
 
+1. POE — read problem, predict archetype (30 sec)
+2. SIGNAL — identify what triggered that prediction  
+3. GENERAL scaffold for that family
+4. SPECIFIC scaffold for this problem
+5. Asserts
+6. Implement
+
+# PREDICTION:  sliding window? hashmap? two pointers?
+# SIGNAL:      what in the problem description triggered that?
+# FAMILY:      confirmed archetype
+# CATEGORY:    specific to this problem
+# LOCAL:       
+# BASE CASE:   
+# COMBINE:     
+# INPUT:       
+# OUTPUT:      
+# TRANSLATE:
+
 SCAFFOLD
 1. CATEGORY:    what type of problem is this?
 2. LOCAL:       what does one step/element need to know?
