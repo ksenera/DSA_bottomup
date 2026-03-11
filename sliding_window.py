@@ -90,6 +90,8 @@ def long_substr(s):
     max_len = 0 # tracker starts at 0 
     for right in range(len(s)): # right moves forward. need len of str
         if s[right] in seen and seen[s[right]] >= left: # is char already seen
+        # for if condition is it seen aka does it exist and ensure the right pointer
+        # of string s is greater than or equal to left pointer
             left = seen[s[right]] + 1 # left has to move if char was repeated
             # move left only when broken
         # update position every iteration in for loop
