@@ -33,15 +33,58 @@ NOTES:
 
 # invariant is check existence before updating
 
-def group_anagrams():
-    pass 
-
-#happy path i have a word gets sorted and gives me group of words that are anagrams of og word 
+# happy path i have a word gets sorted and gives me group of words 
+# that are anagrams of og word 
 # assert group_anagrams(word) = [group] WRONG — = is assignment
 # assert group_anagrams(word) == [group] RIGHT - == comparison
 
+def group_anagrams_copy(strs):        # strs here = PARAMETER
+                                  # it's a placeholder name
+                                  # caller passes the actual value
+
+    strs = ["eat","tea","tan"]   # this OVERWRITES the parameter
+                                  # now strs always = this hardcoded list
+                                  # your assert input gets ignored
+
+
+# Delete that line inside the function. 
+# The parameter `strs` already holds whatever you pass in 
+# via the assert.
+
+
+
 #leetcode 49 Medium 
-def group_anagrams(strs: List[str]) -> List[List[str]]:
-    pass 
+def group_anagrams(strs):
+    result = {} 
+    for word in strs:
+        key = "".join(sorted(word))
+        if key not in result:
+            result[key] = [] 
+        result[key].append(word)
+    print(result)
+    # to get list of lists I need values 
+    # return result[] WRONG
+    return list(result.values())
+
 
 assert group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"]) == [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]
+assert group_anagrams(["bat", "cat", "rat"]) == [["bat"], ["rat", "art"], ["cat", "act"]]
+assert group_anagrams([]) == []
+
+# March 11 2026
+# ─────────────────
+# PROBLEM
+# Group Anagrams — implementation
+
+# ERROR 1
+# WHAT I WROTE: key = word.join(sorted(word))
+# WHAT WAS WRONG: word becomes the separator
+# FIX: "".join(sorted(word)) — empty string = no separator
+# CONNECT: same mistake pattern as node.left vs max_value(node.left)
+#           — used the object itself instead of operating on it
+
+# ERROR 2
+# WHAT I WROTE: assert result == [["eat"],["tea"]...]
+# WHAT WAS WRONG: dict output order not guaranteed
+# FIX: print + visual verify for grouping problems
+# ─────────────────
