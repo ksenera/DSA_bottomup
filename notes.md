@@ -108,3 +108,18 @@ how deep my left side is and how deep my right side is.
 if I hit None that's depth zero — nothing there.
 
 then I return 1 plus whichever side is deeper."
+
+
+____________________________________________________________________
+Deductive (you have this)     Vocabulary (you're building this)
+─────────────────────────     ──────────────────────────────────
+invariants                    join(), sorted(), defaultdict
+base cases                    string methods
+recursion structure           list methods
+scaffold questions            dict initialization patterns
+
+
+hit a mechanics gap mid-problem
+→ I tell you the tool
+→ you use it immediately in context
+→ active recall later from blank IDE
