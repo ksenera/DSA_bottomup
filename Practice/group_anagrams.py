@@ -38,11 +38,11 @@ NOTES:
 # assert group_anagrams(word) = [group] WRONG — = is assignment
 # assert group_anagrams(word) == [group] RIGHT - == comparison
 
-def group_anagrams_copy(strs):        # strs here = PARAMETER
+def group_anagrams_copy(strs):    # strs here = PARAMETER
                                   # it's a placeholder name
                                   # caller passes the actual value
 
-    strs = ["eat","tea","tan"]   # this OVERWRITES the parameter
+    strs = ["eat","tea","tan"]    # this OVERWRITES the parameter
                                   # now strs always = this hardcoded list
                                   # your assert input gets ignored
 
@@ -59,9 +59,12 @@ def group_anagrams_copy(strs):        # strs here = PARAMETER
 def group_anagrams(strs):
     result = {} 
     for word in strs:
-        key = "".join(sorted(word))
+        # inner fx call - sort word
+        # outer fx call - concatenates str with empty str so key is sorted letters of og word
+        key = "".join(sorted(word)) 
+        # first check if key is in the dictionary
         if key not in result:
-            result[key] = [] 
+            result[key] = [] # question using [] for result which was declared {} is it {}[key][value]? is key the index?
         result[key].append(word)
     print(result)
     # to get list of lists I need values 

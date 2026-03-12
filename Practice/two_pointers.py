@@ -102,7 +102,7 @@ None for no solution works too but be consistent:
 _______IMMEDIATE ERROR LOG_______
 Problem 1: no loop. checked sum once and stopped 
  - need to keep checking till pointers meet 
- - what loop runs untul a condition is false 
+ - what loop runs until a condition is false = WHILE LOOP
 Problem 2: not updating pointers:
  - accessing value nums[right -1] but not saving it anywhere
 Problem 3: wrong return:
