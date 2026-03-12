@@ -133,4 +133,9 @@ assert long_substr("") == 0
 # ERROR 3
 # return inside loop
 # INVARIANT: return after loop exits, not during
+
+# NOTED
+# s[right] in seen = have i seen this character before anywhere in the string
+# seen[s[right]] > = left was the last time i saw this char INSIDE my curr window 
+# BECAUSE window is [left ... right]
 # ─────────────────
