@@ -67,10 +67,9 @@ WHAT DO I TRACK:
                 - self.min_stack = [] # parallel min stack, top always = curr_min
                 main stack: [-2, 0, -3] -> pop -> [-2, 0]
                 min stack: [-2, -2, -3] -> pop -> [-2, -2] <-- top = -2 = curr_min
-push: 
-
-pop:
-top: 
-getMin:
+push(val): 
+pop():
+top(): 
+getMin():
 TRANSLATE: 
 """
