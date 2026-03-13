@@ -73,3 +73,11 @@ top():
 getMin():
 TRANSLATE: 
 """
+
+class MinStack:
+    def __init__(self):
+        self.stack = [] # main stack
+        self.min_stack = [] # parallel stack that only tracks minimums
+    def push(self, value):
+        self.stack.append(value) # stack is list type which has append as method
+    
