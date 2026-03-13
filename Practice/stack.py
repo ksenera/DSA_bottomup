@@ -106,6 +106,23 @@ class MinStack:
         # WRONG return min(self.min_stack.top())
         return self.min_stack[-1]
     
+ms = MinStack()
+ms.push(-2)
+# WRONG print(f"ms={ms}")
+print(f"ms={ms.stack}, min={ms.min_stack}")
+ms.push(0)
+print(f"ms={ms.stack}, min={ms.min_stack}")
+ms.push(-3)
+print(f"ms={ms.stack}, min={ms.min_stack}")
+assert ms.getMin() == -3
+ms.pop()
+print(f"ms={ms.stack}, min={ms.min_stack}")
+assert ms.top() == 0 
+assert ms.getMin() == -2 
+
+
+
+
 """
     BUGS 
     1) min_stack append logic 
