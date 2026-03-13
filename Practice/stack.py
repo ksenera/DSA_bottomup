@@ -72,9 +72,14 @@ push(val):  append val to main stack
             if min_stack = [] append val directly 
 pop():      remove last element from main stack
             remove last element from min_stack
-top():      
-getMin():
+top():      return last element of main stack 
+getMin():   return last element of min stack 
 TRANSLATE: 
+append => self.stack.append(val)
+remove last => self.stack.pop()
+last element => self.stack[-1]
+min of two => min(a,b)
+empty check => if not self.stack 
 """
 
 class MinStack:
@@ -83,13 +88,31 @@ class MinStack:
         self.min_stack = [] # parallel stack that only tracks minimums
     def push(self, value):
         self.stack.append(value) # stack is list type which has append as method
-        if self.min_stack == []:
+        # if self.min_stack == []: WRONG
+        #     self.min_stack.append(value) WRONG
+        # self.min_stack.min(value, self.min_stack.top()) WRONG
+        if not self.min_stack:
             self.min_stack.append(value)
-        self.min_stack.min(value, self.min_stack.top())
+        else:
+            self.min_stack.append(min(value, self.min_stack[-1]))
     def pop(self):
         self.stack.pop() # uses list's pop
         self.min_stack.pop()
     def top(self):
-        return self.stack[-1] and self.min_stack[-1]# gives access to stack thru self and -1 last index on list
+        # WRONG return self.stack[-1] and self.min_stack[-1]
+        # gives access to stack thru self and -1 last index on list
+        return self.stack[-1]
     def getMin(self):
-        return min(self.min_stack.top())
+        # WRONG return min(self.min_stack.top())
+        return self.min_stack[-1]
+    
+"""
+    BUGS 
+    1) min_stack append logic 
+    self.min_stack.min(value, self.min_stack.top())
+    .min() and .top() don't exist on list
+
+    2) return self.stack[-1] and self.min_stack[-1]  # returns both
+
+    3) return min(self.min_stack.top())  # .top() doesn't exist on list
+"""
