@@ -1,4 +1,4 @@
-#______________GIVEN________________
+#______________GIVEN________________ LC1
 '''Given a sorted list of integers find two numbers that 
    add up to the target. Return their indices. 
    Ex: 2 + 7 = 9 =====> nums[0] + nums[1] = target 

@@ -65,3 +65,36 @@ print(count)
 
 
 #__________________________________________________________________
+
+
+def two_sum(sum, target):
+    left = 0
+    right = len(sum) - 1
+    sum = left + right 
+    
+    while left < right:
+        if sum < target:
+            right -= 1
+        if sum > target:
+            left += 1 
+        if sum == target:
+            return list[left,right]
+    return []
+
+def sliding_win(str):
+    seen = {}
+    left = 0 
+    max_len = 0 
+    for right in str:
+        if str[right] in seen and seen[str[right]] >= left:
+            left = seen[str[right]] + 1
+        seen[str[right]] = right 
+    max_len = max(max_len, right - left + 1)
+    return max_len
+
+def group_ana(str):
+    result = {}
+    for word in str:
+        word = "".join(sorted(word))
+        result.append(word)
+    return list[result[word]]
