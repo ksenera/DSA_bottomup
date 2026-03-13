@@ -71,14 +71,39 @@ def two_sum(sum, target):
     left = 0
     right = len(sum) - 1
     sum = left + right 
+# ERROR 1: sum = left + right
+# overwrote input array with index arithmetic
+# INVARIANT: left and right are INDICES into the array
+# actual sum = nums[left] + nums[right]
     
     while left < right:
         if sum < target:
+# ERROR 3: sum < target → right -= 1
+# WRONG DIRECTION
+# if sum too small → need bigger values → move LEFT pointer right
+# if sum too big → need smaller values → move RIGHT pointer left
+# INVARIANT: squeeze inward based on comparison to target
             right -= 1
         if sum > target:
             left += 1 
         if sum == target:
             return list[left,right]
+# ERROR 2: return list[left, right]
+# list[] is not valid syntax
+# CORRECT: return [left, right] or return [left+1, right+1] if 1-indexed
+    return []
+
+def two_sum(nums, target): # nums = the array or list, always
+    left = 0 
+    right = len(nums) - 1
+    while left < right:
+        curr_sum = nums[left] + nums[right] # compute from array values
+        if curr_sum < target:
+            left += 1 # too small → move left pointer right
+        elif curr_sum > target:
+            right -= 1 # too big → move right pointer left
+        else:
+            return [left +1, right +1]
     return []
 
 def sliding_win(str):
@@ -86,9 +111,17 @@ def sliding_win(str):
     left = 0 
     max_len = 0 
     for right in str:
+# ERROR 1: for right in str
+# iterates over characters not indices
+# CORRECT: for right in range(len(s))
+# then access char via s[right]
+
         if str[right] in seen and seen[str[right]] >= left:
             left = seen[str[right]] + 1
         seen[str[right]] = right 
+# ERROR 2: max_len update outside loop
+# same indentation error as first derivation
+# INVARIANT: update state every iteration inside loop
     max_len = max(max_len, right - left + 1)
     return max_len
 
@@ -96,51 +129,31 @@ def group_ana(str):
     result = {}
     for word in str:
         word = "".join(sorted(word))
-        result.append(word)
-    return list[result[word]]
-
-# March 12 2026 — ACTIVE RECALL REP 2
-# ─────────────────────────────────────
-
-# TWO POINTERS — two_sum
-# ERROR 1: sum = left + right
-# overwrote input array with index arithmetic
-# INVARIANT: left and right are INDICES into the array
-# actual sum = nums[left] + nums[right]
-
-# ERROR 2: return list[left, right]
-# list[] is not valid syntax
-# CORRECT: return [left, right] or return [left+1, right+1] if 1-indexed
-
-# ERROR 3: sum < target → right -= 1
-# WRONG DIRECTION
-# if sum too small → need bigger values → move LEFT pointer right
-# if sum too big → need smaller values → move RIGHT pointer left
-# INVARIANT: squeeze inward based on comparison to target
-
-# SLIDING WINDOW — sliding_win
-# ERROR 1: for right in str
-# iterates over characters not indices
-# CORRECT: for right in range(len(s))
-# then access char via s[right]
-
-# ERROR 2: max_len update outside loop
-# same indentation error as first derivation
-# INVARIANT: update state every iteration inside loop
-
-# GROUP ANAGRAMS — group_ana
 # ERROR 1: word = "".join(sorted(word))
 # overwrote the original word with fingerprint
 # fingerprint needs its OWN variable
 # CORRECT: key = "".join(sorted(word))
-
+        result.append(word)
 # ERROR 2: result.append(word)
 # result is a dict not a list — dicts don't have append
 # CORRECT: result[key].append(word)
 # need existence check first or use defaultdict
-
+    return list[result[word]]
 # ERROR 3: return list[result[word]]
 # list[] is not valid syntax
 # word is undefined at return time
 # CORRECT: return list(result.values())
-# ─────────────────────────────────────
+
+
+"""
+The root cause across all 3 recall errors:
+two_sum:    sum = left + right     → overwrote array with index math
+group_ana:  word = "".join(...)    → overwrote original word with fingerprint
+sliding:    for right in str       → iterated chars not indices
+```
+
+All three are the same class of error:
+INVARIANT: never reuse a variable name for a different purpose
+           always name what the variable actually holds
+           nums holds numbers, key holds fingerprint, right holds index
+"""
