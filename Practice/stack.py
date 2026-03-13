@@ -67,9 +67,12 @@ WHAT DO I TRACK:
                 - self.min_stack = [] # parallel min stack, top always = curr_min
                 main stack: [-2, 0, -3] -> pop -> [-2, 0]
                 min stack: [-2, -2, -3] -> pop -> [-2, -2] <-- top = -2 = curr_min
-push(val): 
-pop():
-top(): 
+push(val):  append val to main stack
+            append min(val, curr top of min_stack) to min_stack 
+            if min_stack = [] append val directly 
+pop():      remove last element from main stack
+            remove last element from min_stack
+top():      
 getMin():
 TRANSLATE: 
 """
@@ -80,4 +83,13 @@ class MinStack:
         self.min_stack = [] # parallel stack that only tracks minimums
     def push(self, value):
         self.stack.append(value) # stack is list type which has append as method
-    
+        if self.min_stack == []:
+            self.min_stack.append(value)
+        self.min_stack.min(value, self.min_stack.top())
+    def pop(self):
+        self.stack.pop() # uses list's pop
+        self.min_stack.pop()
+    def top(self):
+        return self.stack[-1] and self.min_stack[-1]# gives access to stack thru self and -1 last index on list
+    def getMin(self):
+        return min(self.min_stack.top())
