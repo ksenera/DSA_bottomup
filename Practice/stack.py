@@ -45,7 +45,7 @@ WHAT DO I TRACK internally to make each operation work?
 --> what do i need to track to answer that in O(1) without scanning whole stack
     = track value of elements to know minimum element 
 --> what should that second list track at each push so that when i pop, ik new min. 
-    = at every push i know what curr_min is. 2nd stack stores min at each step in para
+    = at every push i know what curr_min is. 2nd stack stores min at each step in parallel
 --> when you pop from main stack you also pop from min stack. what left on top of min stack?
     = the minimum that was tracked up until the last operation
 """
