@@ -41,6 +41,14 @@ compress to anchor sentences, encode through spaced active recall.
 - session_state.md     → current target, locked families, deadlines
 - error_tree.md        → tree-specific mistake log
 - transfer_learning.md → transfer problem log
+Derivation file (two_pointers.py)   → scaffold + first implementation
+                                      + IMMEDIATE ERROR LOG (errors during derivation)
+
+Encoding/active_recall.py           → blank recall attempts
+                                      + RECALL ERROR LOG (errors during recall)
+
+Encoding/transfer_learning.py       → new problems same family
+                                      + SIGNAL I MISSED log
 
 ---
 

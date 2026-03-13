@@ -93,6 +93,21 @@ def two_sum(sum, target):
 # CORRECT: return [left, right] or return [left+1, right+1] if 1-indexed
     return []
 
+nums = [2, 7, 9, 11]
+def two_ptrs(nums, target):
+    left = 0 
+    right = len(nums) - 1
+
+    while left < right:
+        sum = nums[left] + nums[right]
+        if sum < target:
+            left += 1
+        if sum > target:
+            right -= 1
+        if sum == target:
+            return [left, right]
+    return []
+
 def two_sum(nums, target): # nums = the array or list, always
     left = 0 
     right = len(nums) - 1
@@ -125,6 +140,17 @@ def sliding_win(str):
     max_len = max(max_len, right - left + 1)
     return max_len
 
+def slide(str):
+    seen = {}
+    left = 0 
+    max_len = 0 
+    for right in range(len(str)):
+        if str[right] in seen and seen[str[right]] >= left:
+            left = seen[str[right]] + 1
+        seen[str[right]] = right
+        max_len = max(max_len, right - left + 1)
+    return max_len
+
 def group_ana(str):
     result = {}
     for word in str:
@@ -143,6 +169,13 @@ def group_ana(str):
 # list[] is not valid syntax
 # word is undefined at return time
 # CORRECT: return list(result.values())
+
+def anagram(str):
+    result = {}
+    for word in str:
+        key = "".join(sorted(word))
+        result[key].append(word)
+    return list(result.values())
 
 
 """

@@ -59,3 +59,9 @@ nums.sort()    # sorts in place
 # MY MIXUP 
 for right in nums:          # right = VALUE (char, int)
 for right in range(len(nums)):  # right = INDEX (0,1,2...)
+
+# ASSIGNMENT INVARIANT
+left side = box name (label)
+right side = value going into box
+never reuse box name for different purpose
+new purpose = new box name

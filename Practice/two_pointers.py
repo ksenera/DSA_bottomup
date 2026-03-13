@@ -1,3 +1,48 @@
+"""
+═══════════════════════════════════════════════════════
+TWO POINTERS
+═══════════════════════════════════════════════════════
+ANCHOR:     "squeeze inward until they meet"
+
+SIGNALS:
+- sorted array + find pair
+- palindrome check
+- partition around value
+- two numbers that sum to target
+
+PREDICTION:  two pointers
+SIGNAL:      what triggered it?
+FAMILY:      two pointers
+CATEGORY:    pair / partition / palindrome
+
+LOCAL:       am I solving a position problem or value problem?
+             what do left and right tell me TOGETHER?
+WHAT DO I TRACK:
+             left  = 0              # position: start
+             right = len(nums) - 1  # position: end
+             curr_sum               # computed fresh every iteration
+BASE CASE:   empty array → return []
+             pointers meet → stop
+COMBINE:     squeeze inward based on comparison to target
+             sum < target → left += 1   (need bigger value)
+             sum > target → right -= 1  (need smaller value)
+             sum == target → found it
+INPUT:       sorted list of integers, target integer
+OUTPUT:      indices of two numbers
+TRANSLATE:
+  "define boundaries"          → left = 0, right = len(nums) - 1
+  "keep squeezing"             → while left < right
+  "compute fresh every step"   → curr_sum = nums[left] + nums[right]
+  "too small"                  → left += 1
+  "too big"                    → right -= 1
+  "found"                      → return [left, right]
+  "no solution"                → return []
+
+ASSERT TYPE: deterministic → strict assert
+═══════════════════════════════════════════════════════
+"""
+
+
 #______________GIVEN________________ LC1
 '''Given a sorted list of integers find two numbers that 
    add up to the target. Return their indices. 
@@ -29,6 +74,8 @@ REMEMBER: two pointers = one ptr at start and one ptr at end
    - sum > target -> move R ptr L
    - sum < target -> move L ptr R 
    - sum == target -> found, return indices
+
+LOCAL: am I solving a position problem or a value problem?
 
 """
 
