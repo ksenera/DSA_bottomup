@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Training Reference</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap');
+
+  :root {
+    --bg:        #0d0f12;
+    --surface:   #13161b;
+    --card:      #1a1e26;
+    --border:    #252a35;
+    --accent:    #7c6af7;
+    --accent2:   #3ecfb2;
+    --warn:      #f97b6b;
+    --muted:     #4a5166;
+    --text:      #d4d8e8;
+    --text-dim:  #7a8099;
+    --green:     #5dd88a;
+    --yellow:    #f0c060;
+    --mono:      'JetBrains Mono', monospace;
+    --sans:      'Syne', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 28px 40px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .header-top h1 {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+
+  .badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .badge.green  { background: var(--green); color: #0d0f12; }
+  .badge.yellow { background: var(--yellow); color: #0d0f12; }
+  .badge.warn   { background: var(--warn); color: #0d0f12; }
+
+  /* ── Tabs ── */
+  .tabs {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .tab {
+    padding: 12px 20px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .tab:hover { color: var(--text); }
+
+  .tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .tab-num {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 3px;
+    background: var(--border);
+    font-size: 9px;
+    margin-right: 7px;
+    vertical-align: middle;
+  }
+
+  /* ── Content ── */
+  .content {
+    padding: 36px 40px;
+    max-width: 960px;
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── Typography helpers ── */
+  .section-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    margin-top: 36px;
+  }
+
+  .section-title:first-child { margin-top: 0; }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* ── Code blocks ── */
+  pre {
+    background: #0a0c0f;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 12px 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .kw   { color: #c792ea; }
+  .fn   { color: #82aaff; }
+  .str  { color: #c3e88d; }
+  .num  { color: #f78c6c; }
+  .cmt  { color: #546e7a; font-style: italic; }
+  .var  { color: #eeffff; }
+  .key  { color: var(--accent2); }
+  .bug  { color: var(--warn); font-weight: 700; }
+  .fix  { color: var(--green); font-weight: 700; }
+
+  /* ── Invariant callout ── */
+  .invariant {
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    background: rgba(124,106,247,0.08);
+    border-radius: 0 5px 5px 0;
+    margin: 12px 0;
+    font-size: 12px;
+    color: var(--text);
+  }
+
+  .invariant strong { color: var(--accent); }
+
+  .anchor {
+    border-left: 3px solid var(--accent2);
+    padding: 12px 16px;
+    background: rgba(62,207,178,0.07);
+    border-radius: 0 5px 5px 0;
+    margin: 12px 0;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--accent2);
+  }
+
+  /* ── Error log ── */
+  .error-entry {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--warn);
+    border-radius: 0 6px 6px 0;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+
+  .error-entry .problem { color: var(--warn); font-weight: 700; font-size: 12px; margin-bottom: 6px; }
+  .error-entry .wrote   { color: var(--text-dim); font-size: 12px; }
+  .error-entry .why     { color: var(--yellow); font-size: 12px; margin-top: 6px; }
+  .error-entry .fix-text { color: var(--green); font-size: 12px; margin-top: 6px; }
+
+  /* ── Family grid ── */
+  .family-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .family-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+
+  .family-card.locked {
+    border-color: var(--green);
+  }
+
+  .family-card.current {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(124,106,247,0.3);
+  }
+
+  .family-card.next {
+    border-color: var(--yellow);
+    opacity: 0.8;
+  }
+
+  .family-name {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 12px;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .family-signal {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .family-anchor {
+    font-size: 11px;
+    color: var(--accent2);
+    font-style: italic;
+  }
+
+  /* ── Row util ── */
+  .row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    min-width: 70px;
+    padding-top: 2px;
+  }
+  .val { color: var(--text); font-size: 12px; }
+
+  p { margin-bottom: 10px; font-size: 13px; color: var(--text); }
+
+  ul { padding-left: 20px; }
+  ul li { margin-bottom: 6px; font-size: 12px; color: var(--text); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <h1>DSA Training Reference</h1>
+    <span class="badge green">Python</span>
+    <span class="badge">Veeva Prep</span>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="show(0)"><span class="tab-num">1</span>Primitives</button>
+    <button class="tab" onclick="show(1)"><span class="tab-num">2</span>Combine</button>
+    <button class="tab" onclick="show(2)"><span class="tab-num">3</span>Abstract</button>
+    <button class="tab" onclick="show(3)"><span class="tab-num">4</span>Error Log</button>
+    <button class="tab" onclick="show(4)"><span class="tab-num">5</span>8 Families</button>
+    <button class="tab" onclick="show(5)"><span class="tab-num">6</span>Stack / Class</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════════════════════════════════════
+     TAB 1 — PRIMITIVES
+══════════════════════════════════════════════ -->
+<div class="panel active" id="panel-0">
+
+  <div class="section-title">The 5 Mechanics to Encode Once</div>
+  <p style="color:var(--text-dim);font-size:12px;">Syntax is arbitrary. Encode each one through doing, not reading. One rep each from blank IDE.</p>
+
+  <div class="card">
+    <div class="card-title"><span class="badge">1</span> Index vs Value</div>
+    <div class="invariant"><strong>Invariant:</strong> index = WHERE it is. value = WHAT it is. <code>nums[index]</code> = WHAT at WHERE. Never confuse the two in a variable name.</div>
+    <pre><span class="cmt"># index: position in array</span>
+<span class="cmt"># value: the actual element</span>
+<span class="var">nums</span> = [<span class="num">2</span>, <span class="num">7</span>, <span class="num">11</span>, <span class="num">15</span>]
+<span class="var">i</span> = <span class="num">0</span>           <span class="cmt"># i is an index</span>
+<span class="var">val</span> = <span class="var">nums</span>[<span class="var">i</span>]  <span class="cmt"># val is a value</span>
+
+<span class="cmt"># for loops give you value directly</span>
+<span class="kw">for</span> <span class="var">num</span> <span class="kw">in</span> <span class="var">nums</span>:        <span class="cmt"># num = value</span>
+    <span class="kw">pass</span>
+
+<span class="kw">for</span> <span class="var">i</span>, <span class="var">num</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="var">nums</span>):  <span class="cmt"># both</span>
+    <span class="kw">pass</span></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge">2</span> Variable Types — Always Ask TYPE First</div>
+    <div class="invariant"><strong>Invariant:</strong> Before naming any variable, ask: what TYPE is this? A dict is not a counter. A list is not a string.</div>
+    <pre><span class="var">seen</span> = {}            <span class="cmt"># dict  — maps key → value</span>
+<span class="var">count</span> = <span class="num">0</span>           <span class="cmt"># int   — accumulates a number</span>
+<span class="var">result</span> = []         <span class="cmt"># list  — collects items</span>
+<span class="var">max_len</span> = <span class="num">0</span>        <span class="cmt"># int   — tracks a running max</span>
+<span class="var">left</span> = <span class="num">0</span>            <span class="cmt"># int   — a pointer (index)</span>
+
+<span class="cmt"># defaultdict auto-initializes missing keys</span>
+<span class="kw">from</span> collections <span class="kw">import</span> <span class="fn">defaultdict</span>
+<span class="var">groups</span> = <span class="fn">defaultdict</span>(<span class="fn">list</span>)  <span class="cmt"># missing key → []</span></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge">3</span> Inside Loop vs Outside Loop</div>
+    <div class="invariant"><strong>Invariant:</strong> Inside loop = resets every iteration (fresh). Outside loop = persists across iterations (accumulates). Wrong placement = wrong answer.</div>
+    <pre><span class="cmt"># WRONG — curr_sum resets every element</span>
+<span class="kw">for</span> <span class="var">num</span> <span class="kw">in</span> <span class="var">nums</span>:
+    <span class="bug">curr_sum = 0</span>       <span class="cmt"># ← inside: always 0</span>
+    <span class="var">curr_sum</span> += <span class="var">num</span>
+
+<span class="cmt"># CORRECT — curr_sum accumulates</span>
+<span class="var">curr_sum</span> = <span class="num">0</span>        <span class="cmt"># ← outside: persists</span>
+<span class="kw">for</span> <span class="var">num</span> <span class="kw">in</span> <span class="var">nums</span>:
+    <span class="fix">curr_sum += num</span></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge">4</span> New Purpose = New Variable Name</div>
+    <div class="invariant"><strong>Invariant:</strong> The moment a variable's purpose changes, make a new box with a new name. Reusing the same name for a different purpose is the root cause of 80% of rep 2 bugs.</div>
+    <pre><span class="cmt"># sliding window — two DIFFERENT indices, two names</span>
+<span class="var">left</span> = <span class="num">0</span>                 <span class="cmt"># left boundary pointer</span>
+<span class="kw">for</span> <span class="var">right</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(<span class="var">s</span>)):  <span class="cmt"># right boundary pointer</span>
+    <span class="kw">pass</span>
+
+<span class="cmt"># hashmap — key stores index, but it IS an index not a value</span>
+<span class="var">seen</span>[<span class="var">s</span>[<span class="var">right</span>]] = <span class="var">right</span>  <span class="cmt"># value = right (index)</span>
+<span class="cmt"># reading it back: seen[char] gives the index of char</span></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge">5</span> Loop Exit State — Ask What Each Variable Holds</div>
+    <div class="invariant"><strong>Invariant:</strong> After any while loop terminates, stop and ask: what is each variable's value RIGHT NOW? The answer to the problem lives in one of them.</div>
+    <pre><span class="cmt"># linked list reversal — what holds the answer at exit?</span>
+<span class="var">curr</span> = <span class="var">head</span>
+<span class="var">prev</span> = <span class="kw">None</span>
+<span class="kw">while</span> <span class="var">curr</span> <span class="kw">is not None</span>:
+    <span class="var">next_node</span> = <span class="var">curr</span>.<span class="key">next</span>
+    <span class="var">curr</span>.<span class="key">next</span> = <span class="var">prev</span>
+    <span class="var">prev</span> = <span class="var">curr</span>
+    <span class="var">curr</span> = <span class="var">next_node</span>
+<span class="cmt"># at exit: curr = None, next_node = None, prev = NEW HEAD</span>
+<span class="kw">return</span> <span class="fix">prev</span>  <span class="cmt"># always prev for linked list reversal</span></pre>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 2 — COMBINE
+══════════════════════════════════════════════ -->
+<div class="panel" id="panel-1">
+
+  <div class="section-title">3 Family Implementations — Rep 2 Bugs Annotated Inline</div>
+  <p style="color:var(--text-dim);font-size:12px;">Each bug from rep 2 is marked inline. Root cause on every one: variable name collision or wrong loop placement.</p>
+
+  <div class="card">
+    <div class="card-title">HashMap — Group Anagrams <span class="badge warn">rep 3 pending</span></div>
+    <pre><span class="kw">from</span> collections <span class="kw">import</span> <span class="fn">defaultdict</span>
+
+<span class="kw">def</span> <span class="fn">group_anagrams</span>(<span class="var">strs</span>):
+    <span class="var">result</span> = <span class="fn">defaultdict</span>(<span class="fn">list</span>)   <span class="cmt"># missing key → []</span>
+    <span class="kw">for</span> <span class="var">word</span> <span class="kw">in</span> <span class="var">strs</span>:
+        <span class="var">key</span> = <span class="str">""</span>.<span class="fn">join</span>(<span class="fn">sorted</span>(<span class="var">word</span>))  <span class="cmt"># fingerprint</span>
+        <span class="var">result</span>[<span class="var">key</span>].<span class="fn">append</span>(<span class="var">word</span>)
+    <span class="kw">return</span> <span class="fn">list</span>(<span class="var">result</span>.<span class="fn">values</span>())
+
+<span class="cmt"># REP 2 BUG: used `result` as both dict name AND loop var
+# result = defaultdict(list)
+# for result in strs:   ← shadowed the dict — now result is a string
+#    key = "".join(sorted(result))  ← result.append() crashes</span>
+
+<span class="cmt"># VOCAB:
+# "".join(sorted(word))  → sort string, no separator
+# list(result.values())  → all dict values as list
+# defaultdict(list)      → auto-init missing keys to []</span></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Sliding Window — LC3 Longest Substring Without Repeating <span class="badge green">locked</span></div>
+    <pre><span class="kw">def</span> <span class="fn">length_of_longest_substring</span>(<span class="var">s</span>):
+    <span class="var">seen</span> = {}       <span class="cmt"># char → last seen index</span>
+    <span class="var">left</span> = <span class="num">0</span>
+    <span class="var">max_len</span> = <span class="num">0</span>
+    <span class="kw">for</span> <span class="var">right</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(<span class="var">s</span>)):
+        <span class="kw">if</span> <span class="var">s</span>[<span class="var">right</span>] <span class="kw">in</span> <span class="var">seen</span> <span class="kw">and</span> <span class="var">seen</span>[<span class="var">s</span>[<span class="var">right</span>]] >= <span class="var">left</span>:
+            <span class="var">left</span> = <span class="var">seen</span>[<span class="var">s</span>[<span class="var">right</span>]] + <span class="num">1</span>
+        <span class="var">seen</span>[<span class="var">s</span>[<span class="var">right</span>]] = <span class="var">right</span>
+        <span class="var">max_len</span> = <span class="fn">max</span>(<span class="var">max_len</span>, <span class="var">right</span> - <span class="var">left</span> + <span class="num">1</span>)
+    <span class="kw">return</span> <span class="var">max_len</span>
+
+<span class="cmt"># REP 2 BUG: used `i` instead of `right`, then used `i` again
+# as a separate loop counter — same name, different purpose.
+# seen[i] = i means both key and value were the same variable.
+# Fix: left/right are pointer names, seen[s[right]] = right is clear.</span></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Two Pointers — Two Sum II <span class="badge yellow">pending rep</span></div>
+    <pre><span class="kw">def</span> <span class="fn">two_sum</span>(<span class="var">nums</span>, <span class="var">target</span>):
+    <span class="var">left</span>, <span class="var">right</span> = <span class="num">0</span>, <span class="fn">len</span>(<span class="var">nums</span>) - <span class="num">1</span>
+    <span class="kw">while</span> <span class="var">left</span> < <span class="var">right</span>:
+        <span class="var">curr</span> = <span class="var">nums</span>[<span class="var">left</span>] + <span class="var">nums</span>[<span class="var">right</span>]
+        <span class="kw">if</span> <span class="var">curr</span> < <span class="var">target</span>:
+            <span class="var">left</span> += <span class="num">1</span>
+        <span class="kw">elif</span> <span class="var">curr</span> > <span class="var">target</span>:
+            <span class="var">right</span> -= <span class="num">1</span>
+        <span class="kw">else</span>:
+            <span class="kw">return</span> [<span class="var">left</span>, <span class="var">right</span>]
+    <span class="kw">return</span> []
+
+<span class="cmt"># REP 2 BUG: named sum variable `sum` — shadows Python built-in.
+# Also used `left` as both the pointer AND the result index.
+# Fix: curr = current sum (new purpose = new name).</span></pre>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 3 — ABSTRACT
+══════════════════════════════════════════════ -->
+<div class="panel" id="panel-2">
+
+  <div class="section-title">The Transfer Layer — One Invariant Per Family</div>
+  <p style="color:var(--text-dim);font-size:12px;">Once you have the anchor sentence you reconstruct from scratch, not from memory. This is where SICP kicks in.</p>
+
+  <div class="card">
+    <div class="card-title">HashMap</div>
+    <div class="anchor">"store while scanning, retrieve in O(1)"</div>
+    <div class="invariant"><strong>The invariant:</strong> You've already seen something. You store it. Later you check if what you need is already stored. The dict is the bridge between past and present in the same scan.</div>
+    <div class="row"><div class="label">signal</div><div class="val">grouping / counting / lookup / existence check</div></div>
+    <div class="row"><div class="label">key</div><div class="val">what you fingerprint on (sorted string, char, value)</div></div>
+    <div class="row"><div class="label">value</div><div class="val">what you retrieve (list of words, index, count)</div></div>
+    <pre><span class="cmt"># Transfer: any grouping problem
+# fingerprint → key, item → value
+# "".join(sorted(word)) is a fingerprint
+# counts[char] += 1  is a count fingerprint</span></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Two Pointers</div>
+    <div class="anchor">"squeeze inward until they meet"</div>
+    <div class="invariant"><strong>The invariant:</strong> Sorted array. Two ends. The comparison at any step tells you which side is wrong. You eliminate one side. You never need to check both simultaneously.</div>
+    <div class="row"><div class="label">signal</div><div class="val">sorted array + find pair / partition / palindrome</div></div>
+    <div class="row"><div class="label">stop</div><div class="val">left &gt;= right</div></div>
+    <div class="row"><div class="label">move</div><div class="val">too small → left++, too big → right--, equal → answer</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Sliding Window</div>
+    <div class="anchor">"expand right until broken, shrink left until fixed"</div>
+    <div class="invariant"><strong>The invariant:</strong> right always moves forward. left only moves to repair a violation. seen stores the last index of each char — not just whether it exists, but WHERE it was, so you can jump left past it.</div>
+    <div class="row"><div class="label">signal</div><div class="val">contiguous subarray / substring + constraint</div></div>
+    <div class="row"><div class="label">seen value</div><div class="val">last index (not bool) — needed to jump left correctly</div></div>
+    <div class="row"><div class="label">guard</div><div class="val">seen[char] &gt;= left — only care if char is inside current window</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Trees</div>
+    <div class="anchor">"ask None, ask one node, combine children"</div>
+    <div class="invariant"><strong>The invariant:</strong> You never need to see the whole tree. You ask one node one question. None always has a definite answer (0, -inf, True). The combine step is the entire problem.</div>
+    <div class="row"><div class="label">signal</div><div class="val">depth / value / relationship / path / count</div></div>
+    <div class="row"><div class="label">base</div><div class="val">None → what? (0 for depth, -inf for max, True for symmetric)</div></div>
+    <div class="row"><div class="label">combine</div><div class="val">max(left, right) + 1, or left and right, or left + right</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Linked List</div>
+    <div class="anchor">"save next, reverse pointer, slide forward"</div>
+    <div class="invariant"><strong>The invariant:</strong> Three variables: prev, curr, next_node. Always in that order. At loop exit, curr = None. prev = answer. Never return curr.</div>
+    <div class="row"><div class="label">signal</div><div class="val">traverse / reverse / detect / merge</div></div>
+    <div class="row"><div class="label">order</div><div class="val">next_node = curr.next → curr.next = prev → prev = curr → curr = next_node</div></div>
+    <div class="row"><div class="label">exit</div><div class="val">curr is None, prev is new head</div></div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 4 — ERROR LOG
+══════════════════════════════════════════════ -->
+<div class="panel" id="panel-3">
+
+  <div class="section-title">Rep 2 Full Mistake Log — Root Cause Analysis</div>
+  <p style="color:var(--text-dim);font-size:12px;">Every bug traces to one of two root causes: variable name collision, or wrong loop placement.</p>
+
+  <div class="error-entry">
+    <div class="problem">linked list reversal — rep 2</div>
+    <div class="wrote">Wrote: <code>return next_node</code> → then <code>return reverse_list</code> → then <code>return curr</code></div>
+    <div class="why">Why: loop logic was perfect, blanked on exit state of each variable</div>
+    <div class="fix-text">Fix: at loop exit curr=None, next_node=None, prev=new head. Answer is always in prev.</div>
+  </div>
+
+  <div class="error-entry">
+    <div class="problem">find_max — rep 2</div>
+    <div class="wrote">Wrote: <code>left = node.left</code> / <code>right = node.right</code> — stored node objects not values</div>
+    <div class="why">Why: confused the node object with the result of recursing into it</div>
+    <div class="fix-text">Fix: node.left = child object. max_value(node.left) = max value IN that subtree. Always recurse to get results.</div>
+  </div>
+
+  <div class="error-entry">
+    <div class="problem">group_anagrams — rep 2</div>
+    <div class="wrote">Wrote: used <code>result</code> as both the dict name AND the loop variable</div>
+    <div class="why">Why: new purpose, same name. dict got shadowed by the string from the loop.</div>
+    <div class="fix-text">Fix: new purpose = new box name. Loop var = word. Dict = result (or groups).</div>
+  </div>
+
+  <div class="error-entry">
+    <div class="problem">sliding window — rep 2</div>
+    <div class="wrote">Wrote: used <code>i</code> for both the pointer and as a loop index in a different context</div>
+    <div class="why">Why: collision between loop variable names across mental contexts</div>
+    <div class="fix-text">Fix: left/right are semantic names. i is anonymous. Prefer semantic over single-letter for pointers.</div>
+  </div>
+
+  <div class="error-entry">
+    <div class="problem">two_sum — rep 2</div>
+    <div class="wrote">Wrote: <code>sum = nums[left] + nums[right]</code> — shadows Python built-in</div>
+    <div class="why">Why: sum is a real Python function. Also used left as both pointer and result index.</div>
+    <div class="fix-text">Fix: curr = current sum. Never name variables after built-ins (sum, list, map, min, max).</div>
+  </div>
+
+  <div class="error-entry">
+    <div class="problem">MinStack — rep 1</div>
+    <div class="wrote">Wrote: <code>return stack[-1] and min_stack[-1]</code> in top(). Also called <code>self.min_stack.top()</code></div>
+    <div class="why">Why: Python lists don't have .min() or .top() — those are Java Stack methods. Also and returns last truthy value, not a tuple.</div>
+    <div class="fix-text">Fix: <code>return self.stack[-1]</code> for top(). <code>return self.min_stack[-1]</code> for get_min(). Use [-1] not .top().</div>
+  </div>
+
+  <hr>
+  <div class="invariant"><strong>Global root cause:</strong> Every bug above traces to one of two patterns.<br>
+  (1) <strong>Variable name collision</strong> — same name, different purpose, in the same scope.<br>
+  (2) <strong>Wrong exit / wrong variable</strong> — not stopping to ask "what does each variable hold right now?"</div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 5 — 8 FAMILIES
+══════════════════════════════════════════════ -->
+<div class="panel" id="panel-4">
+
+  <div class="section-title">Session State</div>
+
+  <div class="row">
+    <div class="label">Locked</div>
+    <div class="val">HashMap, LinkedList, Trees, TwoPointers, IsSymmetric, SlidingWindow, Stack</div>
+  </div>
+  <div class="row">
+    <div class="label">Current</div>
+    <div class="val">Sliding Window → LC3 Longest Substring (locked), pending: Two Sum II reps, Kadane's</div>
+  </div>
+  <div class="row">
+    <div class="label">Next</div>
+    <div class="val">Backtracking → LC22 Generate Parentheses, Valid Sudoku</div>
+  </div>
+  <div class="row">
+    <div class="label">Deadline</div>
+    <div class="val">April 1 rolling — 5 spots remaining</div>
+  </div>
+
+  <hr>
+  <div class="section-title">All 8 Families — Compact</div>
+
+  <div class="family-grid">
+
+    <div class="family-card locked">
+      <div class="family-name">HashMap <span class="badge green" style="font-size:9px;">locked</span></div>
+      <div class="family-signal">signal: grouping / count / lookup / existence</div>
+      <div class="family-anchor">"store while scanning, retrieve in O(1)"</div>
+    </div>
+
+    <div class="family-card locked">
+      <div class="family-name">Linked List <span class="badge green" style="font-size:9px;">locked</span></div>
+      <div class="family-signal">signal: traverse / reverse / detect / merge</div>
+      <div class="family-anchor">"save next, reverse pointer, slide forward"</div>
+    </div>
+
+    <div class="family-card locked">
+      <div class="family-name">Trees <span class="badge green" style="font-size:9px;">locked</span></div>
+      <div class="family-signal">signal: depth / value / relationship / path / count</div>
+      <div class="family-anchor">"ask None, ask one node, combine children"</div>
+    </div>
+
+    <div class="family-card locked">
+      <div class="family-name">Two Pointers <span class="badge green" style="font-size:9px;">locked</span></div>
+      <div class="family-signal">signal: sorted array + pair / partition / palindrome</div>
+      <div class="family-anchor">"squeeze inward until they meet"</div>
+    </div>
+
+    <div class="family-card locked">
+      <div class="family-name">Sliding Window <span class="badge green" style="font-size:9px;">locked</span></div>
+      <div class="family-signal">signal: contiguous subarray + constraint</div>
+      <div class="family-anchor">"expand right until broken, shrink left until fixed"</div>
+    </div>
+
+    <div class="family-card locked">
+      <div class="family-name">Stack <span class="badge green" style="font-size:9px;">locked</span></div>
+      <div class="family-signal">signal: min/max tracking / nested structure / monotonic</div>
+      <div class="family-anchor">"last in, first out — track state with a parallel stack"</div>
+    </div>
+
+    <div class="family-card next">
+      <div class="family-name">Backtracking <span class="badge yellow" style="font-size:9px;">next</span></div>
+      <div class="family-signal">signal: all combinations / permutations / valid builds</div>
+      <div class="family-anchor">"choose, recurse, undo"</div>
+    </div>
+
+    <div class="family-card next">
+      <div class="family-name">Binary Search <span class="badge yellow" style="font-size:9px;">pending</span></div>
+      <div class="family-signal">signal: sorted array + find boundary</div>
+      <div class="family-anchor">"eliminate half, find the boundary"</div>
+    </div>
+
+  </div>
+
+  <hr>
+  <div class="section-title">Recognition Signals</div>
+  <pre><span class="key">sorted array + find boundary</span>     → binary search
+<span class="key">contiguous subarray + constraint</span> → sliding window
+<span class="key">tree + combine children</span>          → DFS recursion
+<span class="key">grouping + fingerprint</span>           → HashMap
+<span class="key">minimum steps + grid</span>            → BFS
+<span class="key">all combinations</span>                → backtracking
+<span class="key">min/max query after push</span>        → Stack (MinStack pattern)</pre>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 6 — STACK / CLASS
+══════════════════════════════════════════════ -->
+<div class="panel" id="panel-5">
+
+  <div class="section-title">Stack Family + Class Mechanics Deep Dive</div>
+
+  <div class="card">
+    <div class="card-title">MinStack — Full Implementation <span class="badge green">locked</span></div>
+    <pre><span class="kw">class</span> <span class="fn">MinStack</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>):
+        <span class="var">self</span>.<span class="key">stack</span> = []
+        <span class="var">self</span>.<span class="key">min_stack</span> = []     <span class="cmt"># parallel stack tracking minimums</span>
+
+    <span class="kw">def</span> <span class="fn">push</span>(<span class="var">self</span>, <span class="var">val</span>):
+        <span class="var">self</span>.<span class="key">stack</span>.<span class="fn">append</span>(<span class="var">val</span>)
+        <span class="var">min_val</span> = <span class="fn">min</span>(<span class="var">val</span>, <span class="var">self</span>.<span class="key">min_stack</span>[<span class="num">-1</span>] <span class="kw">if</span> <span class="var">self</span>.<span class="key">min_stack</span> <span class="kw">else</span> <span class="var">val</span>)
+        <span class="var">self</span>.<span class="key">min_stack</span>.<span class="fn">append</span>(<span class="var">min_val</span>)
+
+    <span class="kw">def</span> <span class="fn">pop</span>(<span class="var">self</span>):
+        <span class="var">self</span>.<span class="key">stack</span>.<span class="fn">pop</span>()
+        <span class="var">self</span>.<span class="key">min_stack</span>.<span class="fn">pop</span>()     <span class="cmt"># always pop both together</span>
+
+    <span class="kw">def</span> <span class="fn">top</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="var">self</span>.<span class="key">stack</span>[<span class="num">-1</span>]    <span class="cmt"># [-1] not .top() — Python list</span>
+
+    <span class="kw">def</span> <span class="fn">get_min</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="var">self</span>.<span class="key">min_stack</span>[<span class="num">-1</span>]  <span class="cmt"># [-1] not .min()</span>
+
+<span class="cmt"># THREE BUGS FROM REP 1:
+# 1. return stack[-1] and min_stack[-1]  → and returns last truthy value
+# 2. self.min_stack.top()  → .top() is Java, not Python
+# 3. return min(self.min_stack.top())  → double wrong: .top() + wrapping in min()</span></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Class Mechanics — Python vs Java mental model</div>
+    <div class="invariant"><strong>Key invariant:</strong> In Python, <code>self</code> is always explicit. Every method takes self as first parameter. Every attribute access is <code>self.thing</code>. There is no implicit <code>this</code>.</div>
+    <pre><span class="kw">class</span> <span class="fn">Node</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>, <span class="var">value</span>):  <span class="cmt"># only value parameter</span>
+        <span class="var">self</span>.<span class="key">val</span> = <span class="var">value</span>
+        <span class="var">self</span>.<span class="key">left</span> = <span class="kw">None</span>          <span class="cmt"># initialized to None, not passed in</span>
+        <span class="var">self</span>.<span class="key">right</span> = <span class="kw">None</span>
+
+<span class="cmt"># WRONG (from test_recall.py rep 1):
+# def __init__(self, value, left, right):
+#     self.next = next   ← mixing linked list and tree attributes</span>
+
+<span class="cmt"># Python list as stack:
+# push  →  stack.append(val)
+# pop   →  stack.pop()
+# peek  →  stack[-1]       ← NOT .top(), NOT .peek()
+# empty →  len(stack) == 0 or not stack</span></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Python Built-ins That Bite You</div>
+    <pre><span class="cmt"># Never shadow these with variable names:</span>
+<span class="kw">sum</span>    <span class="cmt"># use curr_sum, total</span>
+<span class="kw">list</span>   <span class="cmt"># use result, items</span>
+<span class="kw">map</span>    <span class="cmt"># use mapping, lookup</span>
+<span class="kw">min</span>    <span class="cmt"># use min_val, curr_min</span>
+<span class="kw">max</span>    <span class="cmt"># use max_val, curr_max</span>
+<span class="kw">input</span>  <span class="cmt"># use data, s</span>
+<span class="kw">type</span>   <span class="cmt"># use kind, dtype</span>
+<span class="kw">id</span>     <span class="cmt"># use node_id, uid</span>
+
+<span class="cmt"># Python list methods (not Java):
+# .append(x)   add to end
+# .pop()       remove and return last
+# [-1]         peek last
+# .pop(0)      remove first (use deque for O(1))
+# len(lst)     NOT lst.length or lst.size()</span></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Next: Backtracking Scaffold</div>
+    <div class="anchor">"choose, recurse, undo"</div>
+    <pre><span class="kw">def</span> <span class="fn">backtrack</span>(<span class="var">state</span>, <span class="var">choices</span>):
+    <span class="kw">if</span> <span class="var">base_case</span>:
+        <span class="var">result</span>.<span class="fn">append</span>(<span class="fn">list</span>(<span class="var">state</span>))  <span class="cmt"># copy, not reference</span>
+        <span class="kw">return</span>
+    <span class="kw">for</span> <span class="var">choice</span> <span class="kw">in</span> <span class="var">choices</span>:
+        <span class="var">state</span>.<span class="fn">append</span>(<span class="var">choice</span>)       <span class="cmt"># choose</span>
+        <span class="fn">backtrack</span>(<span class="var">state</span>, <span class="var">choices</span>)  <span class="cmt"># recurse</span>
+        <span class="var">state</span>.<span class="fn">pop</span>()                  <span class="cmt"># undo</span>
+
+<span class="cmt"># LC22 Generate Parentheses:
+# state = current string being built
+# choices = add "(" if open < n, add ")" if close < open
+# base case = len(state) == 2*n</span></pre>
+  </div>
+
+</div>
+
+</div><!-- /content -->
+
+<script>
+  function show(idx) {
+    document.querySelectorAll('.panel').forEach((p, i) => {
+      p.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      t.classList.toggle('active', i === idx);
+    });
+  }
+</script>
+</body>
+</html>

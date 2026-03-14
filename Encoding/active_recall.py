@@ -174,6 +174,8 @@ def anagram(str):
     result = {}
     for word in str:
         key = "".join(sorted(word))
+        if key not in result:
+            result[key] = [] # question using [] for result which was declared {} is it {}[key][value]? is key the index?
         result[key].append(word)
     return list(result.values())
 
