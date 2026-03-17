@@ -179,3 +179,29 @@ function returns None implicitly:
 # you read values
 # never confuse the two
 # ─────────────────
+
+
+"""
+LC15 - 3SUM 
+GIVEN: an integer array nums, return all the triplets 
+[nums[i], nums[j], nums[k]] such that i != j, i != k, j != k
+and nums[i] + nums[j] + nums[k] == 0 
+the sln set must not contain duplicate triplets. 
+INPUT: nums = [-1, 0, 1, 2, -1, -4]
+        idx =   0  1  2  3   4   5
+OUTPUT: [[-1, -1, 2], [-1, 0, 1]]
+idx used  0   4   3
+
+PREDICTION: two pointers from list of nums left and right 
+SIGNAL: 
+FAMILY:
+CATEGORY:
+LOCAL:
+WHAT DO I TRACK:
+BASE CASE:
+COMBINE:
+INPUT:
+OUTPUT:
+TRANSLATE:
+"""
+
