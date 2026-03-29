@@ -193,12 +193,13 @@ OUTPUT: [[-1, -1, 2], [-1, 0, 1]]
 idx used  0   4   3
 
 PREDICTION: two pointers from list of nums left and right 
-SIGNAL: 
-FAMILY:
+SIGNAL: given array of nums to return 3 distinct values not idx need ptr
+FAMILY: use of two pointers 
 CATEGORY:
 LOCAL:
 WHAT DO I TRACK:
-BASE CASE:
+BASE CASE: to get [] empty array what does the input need to be 
+        asserting nums = [] output = [] 
 COMBINE:
 INPUT:
 OUTPUT:
