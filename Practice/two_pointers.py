@@ -204,17 +204,3 @@ INPUT:
 OUTPUT:
 TRANSLATE:
 """
-
-    while left < right:
-        # check sum 
-        sum = nums[left] + nums[right]
-        if sum > target:
-            right -= 1
-        if sum < target:
-            left += 1
-        if sum == target:
-            # WRONG
-            #return nums[left, right]
-            return [left, right]
-    # no soln exists
-    return []
